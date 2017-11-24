@@ -1,0 +1,33 @@
+config.properties，注意修改这两个属性，最好设置的高一些，这样不会出现超时错误，因为有时候系统确实会等待稍长一点时间就能正常运行。
+org.hyperledger.fabric.sdk.proposal.wait.time
+org.hyperledger.fabric.sdk.channel.genesisblock_wait_time
+
+fabric/sdk/helper/Config.java文件中的属性也要修改
+defaultProperty(PROPOSAL_WAIT_TIME, "180000");
+defaultProperty(GENESISBLOCK_WAIT_TIME, "180000");
+
+还有其他的发送交易的函数中，有些时间相关的参数需要放到配置文件中，而不是写死在代码里。待解决。
+
+TLS配置问题，TOMCAT-HTTPS配置
+
+目前的问题：
+TLS双向认证似乎不支持，TLS开启后，合约容器无法启动，无法Instantiate ChianCode。
+
+似乎每次修改ChianCode源代码之后，必须重新起一个名字，才能真正安装成功，要不然运行的依然是以前的ChianCode，这个很奇怪。
+是因为容器没有真正删除吗？？？？？eclipse需要clean????
+//最近几次测试，即使改了名字，也不一定真正安装成功。
+//这是一个SDK或者FABRIC的BUG，也可能是Docker容器缓存的原因？？？（这个已经解决，代码没写正确）,最上边的问题还在。
+
+SDK安装ChianCode是一定通过网络传输过去吗？
+还是因为实验环境下，SDK和FABRIC网络完全运行在同一台机器上，共享了文件系统，所以才能正确运行？？
+目前通过Stream方式安装ChainCode会出现问题，之前是调试好的，现在不行了，该问题暂时搁置，以后新版本说不定就不报错了呢。
+但是要记得解决之。
+
+背书策略问题：为什么初始化的时候需要背书策略，而发送交易的时候没有背书策略步骤，
+是否使用了某些Default-Endorsement-Policy？？？？？？ 
+
+还有一个潜在的问题，就是SDK需要到Orderer节点取Genesis-Block或最新的Latest-Block，
+但是如果Orderer节点没有配置成保留应用账本数据，并且重启了，这样会不会导致应用程序崩溃呢？
+如果这种情况发生，即使重启应用服务器也可能没用，这个要注意了。
+
+
