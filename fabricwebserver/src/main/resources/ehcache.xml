@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd">
+    <cache name="files"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="180"
+           timeToIdleSeconds="180"
+           >
+    </cache>
+</ehcache>

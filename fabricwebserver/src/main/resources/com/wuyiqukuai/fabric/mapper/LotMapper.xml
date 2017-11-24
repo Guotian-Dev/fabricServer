@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuyiqukuai.fabric.dao.LotDao">
+	
+	<select id="selectLots" resultType="com.wuyiqukuai.fabric.domain.Lot">
+		select id, redNumber, blueNumber from lot where state = 1
+	</select>
+	
+	<insert id="insertLot">
+		insert into lot(redNumber, blueNumber, state) values (#{redNumber}, #{blueNumber}, 1)
+	</insert>
+	
+	<update id="updateLotById">
+		update lot set redNumber = #{redNumber} , blueNumber = #{blueNumber} where id = #{id}
+	</update>
+	
+	<select id="selectLotById" resultType="com.wuyiqukuai.fabric.domain.Lot">
+		select id, redNumber, blueNumber from lot where id = #{id}
+	</select>
+	
+	<!-- 删除彩票信息，逻辑删 -->
+	<update id="updateLotState">
+		update lot set state = 0 where id = #{id}
+	</update>
+	
+</mapper>

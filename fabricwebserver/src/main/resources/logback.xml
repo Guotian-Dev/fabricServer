@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<configuration> -->
+<!--<include resource="org/springframework/boot/logging/logback/base.xml"/> -->
+<!--<logger name="org.springframework.web" level="DEBUG"/> -->
+<!--</configuration> -->
+<configuration scan="true" scanPeriod="10 seconds">
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>
+				[ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
+			</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>fabricwebserver_logs/log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>64 MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
+		<prudent>true</prudent>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				[ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
+			</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<!-- 只打印WARN级别的 -->
+		<!-- 
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"> 
+			<level>WARN</level>
+		</filter>
+		-->
+	</appender>
+	
+	<!--root 表示所有-->
+	<!--<root level="INFO">-->
+	<root level="warn">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!--<logger name="user" level="ALL" /> -->
+	<!--日志打印的包的范围，及分类日志文件存储，若是root表示所有包，多个logger控制多个logger包 --> 
+	<!-- <logger name="org.springframework.web" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</logger> -->
+	<logger name="com.wuyiqukuai.fabric" level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+</configuration>

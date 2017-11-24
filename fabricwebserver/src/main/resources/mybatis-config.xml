@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 打印mybatis的信息 -->
+	 <!--<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings> -->
+	<typeAliases>
+		<package name="com.wuyiqukuai.fabric.dao" />
+		<package name="com.wuyiqukuai.fabric.domain" />
+	</typeAliases>
+	<mappers>
+		<!-- 使用文件路径引入 -->
+		 <mapper resource="com/wuyiqukuai/fabric/mapper/EmployeeMapper.xml"/>
+		 <mapper resource="com/wuyiqukuai/fabric/mapper/LotMapper.xml"/>
+		<!-- 使用类注册引入 -->
+		<!--<mapper class="cn.bravolinks.erp.fin.dao.RoleDao"/> -->
+
+		<!-- 通过包名引入 -->
+		<!--<package name="cn.bravolinks.erp.fin.dao"></package> -->
+	</mappers>
+</configuration>

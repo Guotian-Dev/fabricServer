@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuyiqukuai.fabric.dao.EmployeeDao">
+	<select id="selectEmployee" resultType="com.wuyiqukuai.fabric.domain.Employee">
+		select employee_id id, first_name name, email from employees
+	</select>
+	
+	<select id="selectEmployeeById" resultType="com.wuyiqukuai.fabric.domain.Employee">
+		select employee_id id, first_name name, email from employees where employee_id = 100
+	</select>
+	
+	<select id="selectEmpPage" resultType="com.wuyiqukuai.fabric.domain.Employee">
+		select employee_id id, first_name name, email from employees limit #{min}, #{max}
+	</select>
+	
+	<select id="selectEmpCount" resultType="int">
+		select count(1) from employees
+	</select>
+	
+</mapper>

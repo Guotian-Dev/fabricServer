@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>区块浏览</title>
+    <link rel="shortcut icon" href="images/fav.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jsoneditor.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.jsoneditor.min.js"></script>
+</head>
+<body>
+<div id="header">
+    <div class="header-cover"></div>
+    <div class="header-tittle"><a href="index.html">联盟链区块浏览器</a></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-3 col-xs-offset-3">
+                <a href="blocks.html">
+                    <div class="link">
+                        区块浏览
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="search.html">
+                    <div class="link">
+                        数据查询
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content container">
+    <div class="block-info">
+        <div class="info-tittle">节点信息</div>
+        <ul class="info-detail">
+            <li>节点名称:
+                <span>peer0.org1.example.com</span>
+            </li>
+            <li>区块高度:
+                <span>3</span>
+            </li>
+            <li>通道名称:
+                <span>peer0.org1.example.com</span>
+            </li>
+        </ul>
+        <div class="info-hash">当前块hash: <span>
+            ff2b159096348481ade9bbfb5a58d48d14d7a609b04d50cbadd89dd73fab85a3</span></div>
+    </div>
+    <div class="block-tittle">
+        <hr>
+        区块详情
+    </div>
+    <div id="blocks" class="json-editor">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var url = 'data.json';
+        $.getJSON(url,function (data) {
+            console.log(data);
+            var myjson = data.blockListInfo.reverse();
+            var opt = {
+                change: function(data) { /* called on every change */ },
+                propertyclick: function(path) { /* called when a property is clicked with the JS path to that property */ }
+            };
+            /* opt.propertyElement = '<textarea>'; */ // element of the property field, <input> is default
+            /* opt.valueElement = '<textarea>'; */  // element of the value field, <input> is default
+            $('#blocks').jsonEditor(myjson, opt);
+        })
+    });
+</script>
+<div class="footer">
+    <div class="center-block">
+        <p>联盟链区块浏览器2017</p>
+    </div>
+</div>
+</body>
+</html>
